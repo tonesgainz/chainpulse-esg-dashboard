@@ -9,10 +9,10 @@ import {
   Settings, 
   ChevronLeft, 
   ChevronRight,
-  Wallet,
-  BarChart4,
-  Star,
-  Users
+  Leaf,
+  Target,
+  DollarSign,
+  BarChart3
 } from "lucide-react";
 
 interface SidebarLinkProps {
@@ -69,10 +69,10 @@ export default function Sidebar({ className }: SidebarProps) {
           collapsed && "justify-center"
         )}>
           <div className="h-8 w-8 rounded-md bg-primary/90 flex items-center justify-center">
-            <BarChart4 size={18} className="text-primary-foreground" />
+            <Leaf size={18} className="text-primary-foreground" />
           </div>
           {!collapsed && (
-            <h1 className="font-semibold text-xl text-sidebar-foreground">Chain<span className="text-primary">Agent</span></h1>
+            <h1 className="font-semibold text-xl text-sidebar-foreground">Sustain<span className="text-primary">Pulse</span></h1>
           )}
         </div>
       </div>
@@ -97,24 +97,24 @@ export default function Sidebar({ className }: SidebarProps) {
           />
           <SidebarLink 
             icon={List} 
-            label="Project List" 
-            active={activeLink === "Project List"}
+            label="ESG Overview" 
+            active={activeLink === "ESG Overview"}
             collapsed={collapsed}
-            onClick={() => setActiveLink("Project List")}
+            onClick={() => setActiveLink("ESG Overview")}
           />
           <SidebarLink 
-            icon={Star} 
-            label="Top ROI" 
-            active={activeLink === "Top ROI"}
+            icon={Target} 
+            label="Carbon Targets" 
+            active={activeLink === "Carbon Targets"}
             collapsed={collapsed}
-            onClick={() => setActiveLink("Top ROI")}
+            onClick={() => setActiveLink("Carbon Targets")}
           />
           <SidebarLink 
             icon={TrendingUp} 
-            label="Trending" 
-            active={activeLink === "Trending"}
+            label="Sustainability Trends" 
+            active={activeLink === "Sustainability Trends"}
             collapsed={collapsed}
-            onClick={() => setActiveLink("Trending")}
+            onClick={() => setActiveLink("Sustainability Trends")}
           />
         </div>
 
@@ -128,24 +128,24 @@ export default function Sidebar({ className }: SidebarProps) {
           <div className="space-y-1">
             <SidebarLink 
               icon={LineChart} 
-              label="Market Insights" 
-              active={activeLink === "Market Insights"}
+              label="Carbon Analytics" 
+              active={activeLink === "Carbon Analytics"}
               collapsed={collapsed}
-              onClick={() => setActiveLink("Market Insights")}
+              onClick={() => setActiveLink("Carbon Analytics")}
             />
             <SidebarLink 
-              icon={Wallet} 
-              label="Portfolios" 
-              active={activeLink === "Portfolios"}
+              icon={DollarSign} 
+              label="Cost Analysis" 
+              active={activeLink === "Cost Analysis"}
               collapsed={collapsed}
-              onClick={() => setActiveLink("Portfolios")}
+              onClick={() => setActiveLink("Cost Analysis")}
             />
             <SidebarLink 
-              icon={Users} 
-              label="Social Trends" 
-              active={activeLink === "Social Trends"}
+              icon={BarChart3} 
+              label="Compliance Tracking" 
+              active={activeLink === "Compliance Tracking"}
               collapsed={collapsed}
-              onClick={() => setActiveLink("Social Trends")}
+              onClick={() => setActiveLink("Compliance Tracking")}
             />
           </div>
         </div>

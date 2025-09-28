@@ -16,9 +16,9 @@ export default function Header({ onRefresh, isLoading = false }: HeaderProps) {
   return (
     <header className="bg-background py-3 px-4 md:px-8 border-b border-border flex items-center justify-between animate-fade-in">
       <div className="flex-1">
-        <h1 className="text-xl font-medium">Dashboard</h1>
+        <h1 className="text-xl font-medium">Sustainability Dashboard</h1>
         <p className="text-sm text-muted-foreground">
-          Your crypto insights for {new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+          Your ESG & Carbon insights for {new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
         </p>
       </div>
 

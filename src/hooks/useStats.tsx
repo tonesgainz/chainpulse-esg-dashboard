@@ -1,38 +1,38 @@
 
 import { useState, useEffect } from "react";
 import { 
-  marketStats, 
-  tvlGaugeData, 
-  fearGreedIndex, 
-  trendingTokens, 
-  recentlyAddedProjects 
+  sustainabilityStats, 
+  carbonGaugeData, 
+  esgScoreIndex, 
+  sustainabilityTrends, 
+  sustainabilityProjects 
 } from "@/lib/mockData";
 
 // In a real application, we'd fetch from APIs:
-// - Market Data: CoinGecko /api/v3/global
-// - Bitcoin Price: CoinGecko /api/v3/simple/price?ids=bitcoin
-// - Trending Coins: CoinGecko /api/v3/search/trending
-// - Recently Added: CoinGecko /api/v3/coins/markets?order=market_cap_desc
-// - Fear & Greed Index: Alternative.me https://api.alternative.me/fng/
+// - ESG Data: Various ESG rating providers (MSCI, Sustainalytics, etc.)
+// - Carbon Data: Carbon accounting platforms (Persefoni, Plan A, etc.)
+// - Cost Data: Internal ERP systems and sustainability platforms
+// - Compliance Data: Regulatory databases and certification bodies
+// - Temperature Score: Science Based Targets initiative (SBTi) APIs
 
 export function useStats() {
   const [loading, setLoading] = useState(true);
-  const [stats, setStats] = useState(marketStats);
-  const [tvlData, setTvlData] = useState(tvlGaugeData);
-  const [fearGreed, setFearGreed] = useState(fearGreedIndex);
-  const [trending, setTrending] = useState(trendingTokens);
-  const [recentProjects, setRecentProjects] = useState(recentlyAddedProjects);
+  const [stats, setStats] = useState(sustainabilityStats);
+  const [carbonData, setCarbonData] = useState(carbonGaugeData);
+  const [esgScore, setEsgScore] = useState(esgScoreIndex);
+  const [trending, setTrending] = useState(sustainabilityTrends);
+  const [recentProjects, setRecentProjects] = useState(sustainabilityProjects);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     // Simulate API loading
     const timer = setTimeout(() => {
       // In a real app, we would fetch data from APIs here
-      setStats(marketStats);
-      setTvlData(tvlGaugeData);
-      setFearGreed(fearGreedIndex);
-      setTrending(trendingTokens);
-      setRecentProjects(recentlyAddedProjects);
+      setStats(sustainabilityStats);
+      setCarbonData(carbonGaugeData);
+      setEsgScore(esgScoreIndex);
+      setTrending(sustainabilityTrends);
+      setRecentProjects(sustainabilityProjects);
       setLoading(false);
     }, 1000);
 
@@ -52,8 +52,8 @@ export function useStats() {
     loading,
     error,
     stats,
-    tvlData,
-    fearGreed,
+    carbonData,
+    esgScore,
     trending,
     recentProjects,
     refreshData

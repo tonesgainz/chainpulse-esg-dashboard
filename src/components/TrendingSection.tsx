@@ -2,18 +2,18 @@
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { TrendingUp, ArrowUpRight, ArrowDownRight } from "lucide-react";
-import { cryptoCategories } from "@/lib/mockData";
+import { sustainabilityCategories } from "@/lib/mockData";
 
-interface TrendingToken {
+interface SustainabilityTrend {
   id: number;
   name: string;
-  symbol: string;
+  metric: string;
   category: string;
   change: number;
 }
 
 interface TrendingSectionProps {
-  tokens: TrendingToken[];
+  tokens: SustainabilityTrend[];
 }
 
 export default function TrendingSection({ tokens }: TrendingSectionProps) {
@@ -30,11 +30,11 @@ export default function TrendingSection({ tokens }: TrendingSectionProps) {
       <div className="flex justify-between items-center mb-4">
         <div className="flex items-center gap-2">
           <TrendingUp size={16} className="text-primary" />
-          <h3 className="font-medium">Trending</h3>
+          <h3 className="font-medium">Sustainability Metrics Trending</h3>
         </div>
         
         <div className="flex gap-2">
-          {cryptoCategories.map(category => (
+          {sustainabilityCategories.map(category => (
             <button
               key={category.id}
               onClick={() => setSelectedCategory(category.id)}
@@ -61,7 +61,7 @@ export default function TrendingSection({ tokens }: TrendingSectionProps) {
               <div className="flex justify-between items-start mb-3">
                 <div>
                   <h4 className="font-medium">{token.name}</h4>
-                  <div className="text-xs text-muted-foreground mt-0.5">{token.symbol}</div>
+                  <div className="text-xs text-muted-foreground mt-0.5">{token.metric}</div>
                 </div>
                 <div className="text-xs px-2 py-0.5 rounded-full bg-secondary border border-border">
                   {token.category}
