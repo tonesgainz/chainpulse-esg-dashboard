@@ -39,7 +39,7 @@ export default function FearGreedIndex({
       <div className="flex justify-between items-start mb-4">
         <div className="flex items-center gap-2">
           <AlertCircle size={16} className="text-primary" />
-          <h3 className="font-medium">Fear & Greed Index</h3>
+          <h3 className="font-medium">ESG Performance Index</h3>
         </div>
       </div>
       

@@ -1,6 +1,6 @@
 
 import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
-import { ArrowDownRight, ArrowUpRight, LockIcon } from "lucide-react";
+import { ArrowDownRight, ArrowUpRight, Leaf } from "lucide-react";
 
 interface GaugeChartProps {
   value: number;
@@ -27,10 +27,10 @@ export default function GaugeChart({ value, dailyChange, weeklyChange }: GaugeCh
       <div className="flex justify-between items-start mb-6">
         <div>
           <h3 className="text-sm font-medium text-muted-foreground flex items-center gap-1.5">
-            <LockIcon size={14} />
-            Total Value Locked
+            <Leaf size={14} />
+            Carbon Footprint
           </h3>
-          <div className="text-2xl font-semibold mt-1.5">${formattedValue}B</div>
+          <div className="text-2xl font-semibold mt-1.5">{value.toFixed(1)} kg CO2e</div>
         </div>
       </div>
 
@@ -66,21 +66,33 @@ export default function GaugeChart({ value, dailyChange, weeklyChange }: GaugeCh
         </ResponsiveContainer>
 
         <div className="absolute inset-0 flex flex-col items-center justify-center -mt-8">
-          <div className="text-xl font-medium mb-5 text-center">TVL Change</div>
+          <div className="text-xl font-medium mb-5 text-center">Carbon Reduction</div>
           <div className="grid grid-cols-2 gap-4 w-full max-w-[240px]">
             <div className="flex flex-col items-center bg-secondary p-3 rounded-md">
               <div className="text-sm text-muted-foreground mb-1">Daily</div>
               <div className="flex items-center gap-1">
-                <ArrowUpRight size={16} className="text-green-500" />
-                <span className="text-lg font-medium text-green-500">{dailyChange}%</span>
+                {dailyChange >= 0 ? (
+                  <ArrowUpRight size={16} className="text-red-500" />
+                ) : (
+                  <ArrowDownRight size={16} className="text-green-500" />
+                )}
+                <span className={`text-lg font-medium ${dailyChange >= 0 ? 'text-red-500' : 'text-green-500'}`}>
+                  {Math.abs(dailyChange)}%
+                </span>
               </div>
             </div>
             
             <div className="flex flex-col items-center bg-secondary p-3 rounded-md">
               <div className="text-sm text-muted-foreground mb-1">Weekly</div>
               <div className="flex items-center gap-1">
-                <ArrowUpRight size={16} className="text-green-500" />
-                <span className="text-lg font-medium text-green-500">{weeklyChange}%</span>
+                {weeklyChange >= 0 ? (
+                  <ArrowUpRight size={16} className="text-red-500" />
+                ) : (
+                  <ArrowDownRight size={16} className="text-green-500" />
+                )}
+                <span className={`text-lg font-medium ${weeklyChange >= 0 ? 'text-red-500' : 'text-green-500'}`}>
+                  {Math.abs(weeklyChange)}%
+                </span>
               </div>
             </div>
           </div>

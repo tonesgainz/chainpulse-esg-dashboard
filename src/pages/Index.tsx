@@ -22,6 +22,7 @@ export default function Index() {
   
   // Format large numbers for display
   const formatCurrency = (value: number) => {
+    if (!value && value !== 0) return '$0';
     if (value >= 1000000000) {
       return `$${(value / 1000000000).toFixed(2)}B`;
     }
