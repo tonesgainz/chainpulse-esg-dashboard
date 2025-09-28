@@ -161,19 +161,4 @@ export const sustainabilityInsights: Insight[] = [
   },
 ];
 
-export const useStats = () => {
-
-  return {
-    loading: false,
-    stats: sustainabilityStats,
-    carbonData: carbonGaugeData,
-    esgScore: esgScoreIndex,
-    trending: sustainabilityTrends,
-    recentProjects: sustainabilityProjects,
-    carbonEmissionsData,
-    suppliersData,
-    cbamComplianceData,
-    sustainabilityInsights,
-    refreshData: () => console.log("Refreshing...")
-  };
-};
+// This function is now moved to hooks/useStats.tsx

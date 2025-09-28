@@ -20,14 +20,11 @@ import {
 
 export function useStats() {
   const [loading, setLoading] = useState(true);
-  const [stats, setStats] = useState(sustainabilityStats);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     // Simulate API loading
     const timer = setTimeout(() => {
-      // In a real app, we would fetch data from APIs here
-      setStats(sustainabilityStats);
       setLoading(false);
     }, 1000);
 
@@ -37,7 +34,6 @@ export function useStats() {
   // Function to refresh data (placeholder for real implementation)
   const refreshData = () => {
     setLoading(true);
-    // In a real app, we would refetch data from APIs here
     setTimeout(() => {
       setLoading(false);
     }, 1000);
@@ -46,7 +42,7 @@ export function useStats() {
   return {
     loading,
     error,
-    stats,
+    stats: sustainabilityStats,
     carbonData: carbonGaugeData,
     esgScore: esgScoreIndex,
     trending: sustainabilityTrends,
