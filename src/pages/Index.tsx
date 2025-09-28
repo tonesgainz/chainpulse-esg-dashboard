@@ -7,7 +7,8 @@ import StatsCard from "@/components/StatsCard";
 import GaugeChart from "@/components/GaugeChart";
 import TrendingSection from "@/components/TrendingSection";
 import FearGreedIndex from "@/components/FearGreedIndex";
-import { Leaf, Target, DollarSign, TrendingDown } from "lucide-react";
+import { Leaf, Target, DollarSign, TrendingDown, BarChart3 } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 export default function Index() {
   const { 
@@ -33,21 +34,21 @@ export default function Index() {
   };
   
   return (
-    <div className="min-h-screen bg-background flex">
+    <div className="min-h-screen flex">
       <Sidebar />
       
       <div className="flex-1 flex flex-col h-screen overflow-hidden">
         <Header onRefresh={refreshData} isLoading={loading} />
         
-        <main className="flex-1 overflow-y-auto p-4 md:p-6 lg:p-8">
-          <div className="max-w-screen-2xl mx-auto space-y-6">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+        <main className="flex-1 overflow-y-auto p-6 md:p-8 lg:p-10 space-y-8">
+          <div className="max-w-screen-2xl mx-auto space-y-8">
+            {/* Enhanced Stats Cards Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
               <StatsCard 
                 title="ESG Score" 
                 value={`${stats.esgScore}/100`} 
                 change={stats.dailyChange} 
-                icon={<Leaf size={20} className="text-chart-green" />}
-                colorClass="from-green-500/20 to-green-600/5"
+                icon={<Leaf size={22} className="text-success animate-float" />}
                 animationDelay="0ms"
               />
               
@@ -55,31 +56,29 @@ export default function Index() {
                 title="Carbon Footprint" 
                 value={`${stats.carbonFootprint.toFixed(1)} kg CO2e`} 
                 change={stats.weeklyChange} 
-                icon={<Target size={20} className="text-chart-blue" />}
-                colorClass="from-blue-500/20 to-blue-600/5"
-                animationDelay="50ms"
+                icon={<Target size={22} className="text-chart-blue animate-float" />}
+                animationDelay="100ms"
               />
               
               <StatsCard 
                 title="Sustainability Costs" 
                 value={formatCurrency(stats.sustainabilityCosts)} 
                 change={-3.2} 
-                icon={<DollarSign size={20} className="text-chart-yellow" />}
-                colorClass="from-yellow-500/20 to-yellow-600/5"
-                animationDelay="100ms"
+                icon={<DollarSign size={22} className="text-warning animate-float" />}
+                animationDelay="200ms"
               />
               
               <StatsCard 
                 title="Carbon Intensity" 
                 value={`${stats.carbonIntensity} kg CO2e/$`} 
                 change={-8.4} 
-                icon={<TrendingDown size={20} className="text-chart-purple" />}
-                colorClass="from-purple-500/20 to-purple-600/5"
-                animationDelay="150ms"
+                icon={<TrendingDown size={22} className="text-chart-purple animate-float" />}
+                animationDelay="300ms"
               />
             </div>
             
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {/* Enhanced Charts Section */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               <GaugeChart 
                 value={carbonData.current} 
                 dailyChange={carbonData.dailyChange} 
@@ -94,46 +93,75 @@ export default function Index() {
               />
             </div>
             
+            {/* Enhanced Trending Section */}
             <TrendingSection tokens={trending} />
             
-            <div className="rounded-lg border border-border bg-card">
-              <div className="p-6">
-                <h3 className="text-lg font-semibold mb-4">Sustainability Projects</h3>
-                <div className="space-y-4">
-                  {recentProjects.map((project) => (
-                    <div key={project.id} className="flex items-center justify-between p-4 bg-muted/50 rounded-md">
-                      <div className="flex-1">
-                        <h4 className="font-medium">{project.name}</h4>
-                        <p className="text-sm text-muted-foreground">{project.category}</p>
-                      </div>
-                      <div className="flex items-center gap-4 text-sm">
-                        <div className="text-center">
-                          <div className="font-medium">{project.esgScore}</div>
-                          <div className="text-muted-foreground">ESG Score</div>
-                        </div>
-                        <div className="text-center">
-                          <div className="font-medium">{project.carbonReduction} kg</div>
-                          <div className="text-muted-foreground">CO2e Saved</div>
-                        </div>
-                        <div className="text-center">
-                          <div className={`font-medium ${project.costSavings >= 0 ? 'text-green-500' : 'text-red-500'}`}>
-                            {project.costSavings >= 0 ? '+' : ''}${project.costSavings.toLocaleString()}
-                          </div>
-                          <div className="text-muted-foreground">Cost Impact</div>
-                        </div>
-                        <div className="text-center">
-                          <div className={`px-2 py-1 rounded text-xs ${
-                            project.status === 'Active' ? 'bg-green-100 text-green-800' :
-                            project.status === 'In Progress' ? 'bg-yellow-100 text-yellow-800' :
-                            'bg-gray-100 text-gray-800'
-                          }`}>
-                            {project.status}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
+            {/* Enhanced Projects Section */}
+            <div className="stat-card rounded-xl p-8 border border-white/10 animate-fade-in">
+              <div className="relative">
+                {/* Animated background */}
+                <div className="absolute inset-0 opacity-5">
+                  <div className="h-full w-full sustainability-gradient animate-gradient" />
                 </div>
+                
+                <div className="relative z-10">
+                  <div className="flex items-center gap-3 mb-8">
+                    <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center animate-glow">
+                      <BarChart3 size={18} className="text-primary" />
+                    </div>
+                    <h3 className="text-2xl font-bold font-display gradient-text">Sustainability Projects</h3>
+                  </div>
+                  
+                  <div className="space-y-4">
+                    {recentProjects.map((project, index) => (
+                      <div 
+                        key={project.id} 
+                        className="group stat-card p-6 rounded-xl border border-white/10 card-hover animate-scale-in"
+                        style={{ animationDelay: `${index * 50}ms` }}
+                      >
+                        <div className="flex items-center justify-between">
+                          <div className="flex-1 space-y-1">
+                            <h4 className="font-semibold text-lg text-foreground/95">{project.name}</h4>
+                            <p className="text-sm text-muted-foreground font-medium">{project.category}</p>
+                          </div>
+                          
+                          <div className="flex items-center gap-8 text-sm">
+                            <div className="text-center space-y-1">
+                              <div className="font-bold text-lg text-success">{project.esgScore}</div>
+                              <div className="text-xs text-muted-foreground uppercase tracking-wide">ESG Score</div>
+                            </div>
+                            
+                            <div className="text-center space-y-1">
+                              <div className="font-bold text-lg text-primary">{project.carbonReduction} kg</div>
+                              <div className="text-xs text-muted-foreground uppercase tracking-wide">CO2e Saved</div>
+                            </div>
+                            
+                            <div className="text-center space-y-1">
+                              <div className={`font-bold text-lg ${project.costSavings >= 0 ? 'text-success' : 'text-error'}`}>
+                                {project.costSavings >= 0 ? '+' : ''}${project.costSavings.toLocaleString()}
+                              </div>
+                              <div className="text-xs text-muted-foreground uppercase tracking-wide">Cost Impact</div>
+                            </div>
+                            
+                            <div className="text-center space-y-1">
+                              <div className={cn(
+                                "px-4 py-2 rounded-lg text-sm font-semibold border",
+                                project.status === 'Active' ? 'bg-success/10 text-success border-success/20' :
+                                project.status === 'In Progress' ? 'bg-warning/10 text-warning border-warning/20' :
+                                'bg-secondary/50 text-muted-foreground border-border'
+                              )}>
+                                {project.status}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                
+                {/* Subtle top border glow */}
+                <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
               </div>
             </div>
           </div>

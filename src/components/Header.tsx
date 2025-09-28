@@ -14,33 +14,39 @@ export default function Header({ onRefresh, isLoading = false }: HeaderProps) {
   const isMobile = useIsMobile();
 
   return (
-    <header className="bg-background py-3 px-4 md:px-8 border-b border-border flex items-center justify-between animate-fade-in">
+    <header className="glass-panel py-4 px-6 md:px-8 border-b border-white/10 flex items-center justify-between animate-fade-in backdrop-blur-xl">
       <div className="flex-1">
-        <h1 className="text-xl font-medium">Sustainability Dashboard</h1>
-        <p className="text-sm text-muted-foreground">
-          Your ESG & Carbon insights for {new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+        <h1 className="text-2xl font-bold font-display gradient-text">
+          Sustainability Dashboard
+        </h1>
+        <p className="text-sm text-muted-foreground/80 mt-1">
+          Your ESG & Carbon insights for{" "}
+          <span className="text-primary font-medium">
+            {new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+          </span>
         </p>
       </div>
 
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-4">
         <button
           onClick={onRefresh}
           className={cn(
-            "h-9 w-9 rounded-full flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors bg-secondary hover:bg-secondary/80",
-            isLoading && "animate-pulse"
+            "h-10 w-10 rounded-xl button-gradient flex items-center justify-center transition-all duration-300",
+            isLoading && "animate-spin-slow"
           )}
           disabled={isLoading}
         >
-          <RefreshCw size={16} className={isLoading ? "animate-spin" : ""} />
+          <RefreshCw size={18} className={isLoading ? "animate-spin" : ""} />
         </button>
         
-        <button className="h-9 w-9 rounded-full flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors bg-secondary hover:bg-secondary/80 relative">
-          <Bell size={16} />
-          <span className="absolute top-1 right-2 h-2 w-2 rounded-full bg-primary"></span>
+        <button className="h-10 w-10 rounded-xl stat-card flex items-center justify-center border border-white/10 transition-all duration-300 hover:scale-105 relative group">
+          <Bell size={18} />
+          <span className="absolute -top-1 -right-1 h-3 w-3 rounded-full bg-accent animate-pulse shadow-lg"></span>
+          <span className="absolute -top-1 -right-1 h-3 w-3 rounded-full bg-accent animate-ping"></span>
         </button>
 
-        <div className="h-9 relative hidden sm:block">
-          <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+        <div className="relative hidden sm:block">
+          <div className="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none">
             <Search size={16} className="text-muted-foreground" />
           </div>
           <input
@@ -48,7 +54,7 @@ export default function Header({ onRefresh, isLoading = false }: HeaderProps) {
             value={searchValue}
             onChange={(e) => setSearchValue(e.target.value)}
             placeholder="Search projects..."
-            className="pl-10 pr-4 py-2 h-full rounded-full text-sm bg-secondary border border-border focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary transition-colors w-[220px] md:w-[280px]"
+            className="pl-12 pr-4 py-3 h-10 rounded-xl text-sm stat-card border border-white/10 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all duration-300 w-[240px] md:w-[320px] backdrop-blur-xl"
           />
         </div>
       </div>
