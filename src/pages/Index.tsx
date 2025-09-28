@@ -7,7 +7,12 @@ import StatsCard from "@/components/StatsCard";
 import GaugeChart from "@/components/GaugeChart";
 import TrendingSection from "@/components/TrendingSection";
 import FearGreedIndex from "@/components/FearGreedIndex";
-import { Leaf, Target, DollarSign, TrendingDown, BarChart3 } from "lucide-react";
+import CarbonEmissionsTrendChart from "@/components/CarbonEmissionsTrendChart";
+import SupplyChainESGHeatmap from "@/components/SupplyChainESGHeatmap";
+import CBAMComplianceDashboard from "@/components/CBAMComplianceDashboard";
+import SustainabilityInsights from "@/components/SustainabilityInsights";
+import MarkdownRenderer from "@/components/MarkdownRenderer";
+import { Leaf, Target, DollarSign, TrendingDown, BarChart3, FileCheck, Brain } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export default function Index() {
@@ -17,7 +22,7 @@ export default function Index() {
     carbonData, 
     esgScore, 
     trending, 
-    recentProjects, 
+    recentProjects,
     refreshData 
   } = useStats();
   
@@ -77,7 +82,7 @@ export default function Index() {
               />
             </div>
             
-            {/* Enhanced Charts Section */}
+            {/* Core Charts Section */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               <GaugeChart 
                 value={carbonData.current} 
@@ -91,6 +96,118 @@ export default function Index() {
                 previousValue={esgScore.previousValue} 
                 previousChange={esgScore.previousChange} 
               />
+            </div>
+
+            {/* Carbon Emissions Trend Chart */}
+            <CarbonEmissionsTrendChart 
+              data={carbonEmissionsData} 
+              timeframe="weekly" 
+            />
+
+            {/* Supply Chain & Compliance Section */}
+            <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
+              <SupplyChainESGHeatmap suppliers={suppliersData} />
+              
+              <div className="space-y-8">
+                <CBAMComplianceDashboard 
+                  complianceItems={cbamComplianceData.items}
+                  overallStatus={cbamComplianceData.overallStatus}
+                  estimatedPenalties={cbamComplianceData.estimatedPenalties}
+                />
+              </div>
+            </div>
+
+            {/* AI Insights Section */}
+            <SustainabilityInsights insights={sustainabilityInsights} />
+
+            {/* Enhanced Documentation Section */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              <div className="stat-card rounded-xl p-8 border border-white/10 animate-fade-in">
+                <div className="relative">
+                  {/* Animated background */}
+                  <div className="absolute inset-0 opacity-5">
+                    <div className="h-full w-full sustainability-gradient animate-gradient" />
+                  </div>
+                  
+                  <div className="relative z-10">
+                    <div className="flex items-center gap-3 mb-6">
+                      <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center animate-glow">
+                        <FileCheck size={18} className="text-primary" />
+                      </div>
+                      <h3 className="text-xl font-bold font-display gradient-text">Sustainability Documentation</h3>
+                    </div>
+                    
+                    <MarkdownRenderer 
+                      content={`
+# ESG Reporting Standards
+
+Our comprehensive sustainability framework follows **GRI Standards** and **SASB** guidelines.
+
+## Key Compliance Areas:
+- **Carbon Accounting**: Scope 1, 2, and 3 emissions tracking
+- **Supply Chain Transparency**: Regular ESG assessments
+- **Regulatory Compliance**: CBAM readiness and documentation
+
+### Current Performance:
+- ESG Score: **${stats.esgScore}/100**
+- Carbon Intensity: **${stats.carbonIntensity} kg CO2e/$**
+- Compliance Rate: **${cbamComplianceData.overallStatus}%**
+
+[View Full ESG Report](https://example.com/esg-report)
+                      `}
+                      className="text-sm"
+                    />
+                  </div>
+                  
+                  {/* Subtle top border glow */}
+                  <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
+                </div>
+              </div>
+
+              <div className="stat-card rounded-xl p-8 border border-white/10 animate-fade-in">
+                <div className="relative">
+                  {/* Animated background */}
+                  <div className="absolute inset-0 opacity-5">
+                    <div className="h-full w-full sustainability-gradient animate-gradient" />
+                  </div>
+                  
+                  <div className="relative z-10">
+                    <div className="flex items-center gap-3 mb-6">
+                      <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center animate-glow">
+                        <Brain size={18} className="text-primary" />
+                      </div>
+                      <h3 className="text-xl font-bold font-display gradient-text">Action Items</h3>
+                    </div>
+                    
+                    <MarkdownRenderer 
+                      content={`
+# Priority Actions
+
+## High Impact Opportunities:
+- **Energy Optimization**: Switch to renewable sources for *40% emission reduction*
+- **Supply Chain**: Address compliance issues with high-risk suppliers
+- **CBAM Preparation**: Complete overdue documentation requirements
+
+## Quick Wins:
+- Implement \`waste reduction\` practices (30% improvement)
+- Update carbon accounting methodology
+- Schedule supplier ESG assessments
+
+### Timeline:
+- **Immediate**: Address overdue compliance items
+- **30 days**: Complete energy audit  
+- **90 days**: Implement optimization recommendations
+
+*Estimated total savings: $${sustainabilityInsights.reduce((sum, i) => sum + (i.estimatedSavings || 0), 0).toLocaleString()}*
+                      `}
+                      className="text-sm"
+                    />
+                  </div>
+                  
+                  {/* Subtle top border glow */}
+                  <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/50 to-transparent" />
+                </div>
+              </div>
             </div>
             
             {/* Enhanced Trending Section */}
