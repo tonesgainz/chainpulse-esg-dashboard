@@ -92,34 +92,76 @@ export const sustainabilityCategories = [
   { id: "governance", name: "Governance" },
 ];
 
+export const carbonEmissionsData: EmissionData[] = [
+  { date: "Jan", scope1: 145.2, scope2: 234.8, scope3: 456.1, total: 836.1 },
+  { date: "Feb", scope1: 138.4, scope2: 228.3, scope3: 442.7, total: 809.4 },
+  { date: "Mar", scope1: 142.1, scope2: 225.6, scope3: 438.9, total: 806.6 },
+  { date: "Apr", scope1: 135.7, scope2: 220.4, scope3: 425.3, total: 781.4 },
+  { date: "May", scope1: 139.8, scope2: 218.9, scope3: 432.1, total: 790.8 },
+  { date: "Jun", scope1: 133.2, scope2: 215.7, scope3: 419.8, total: 768.7 },
+];
+
+export const suppliersData: Supplier[] = [
+  {
+    id: "1", name: "EcoTextiles Corp", location: "Mumbai, India", 
+    coordinates: { x: 65, y: 45 }, esgScore: 85, carbonFootprint: 12.4,
+    riskLevel: "low", category: "Textiles", compliance: 94
+  },
+  {
+    id: "2", name: "GreenTech Materials", location: "Shenzhen, China", 
+    coordinates: { x: 75, y: 35 }, esgScore: 78, carbonFootprint: 18.7,
+    riskLevel: "medium", category: "Electronics", compliance: 87
+  },
+  {
+    id: "3", name: "SustainPack Ltd", location: "Birmingham, UK", 
+    coordinates: { x: 25, y: 25 }, esgScore: 92, carbonFootprint: 8.3,
+    riskLevel: "low", category: "Packaging", compliance: 98
+  },
+];
+
+export const cbamComplianceItems: ComplianceItem[] = [
+  {
+    id: "1", category: "Carbon Content Declaration", status: "completed",
+    deadline: "2024-12-31", progress: 100, description: "Submit carbon content data"
+  },
+  {
+    id: "2", category: "CBAM Certificate", status: "in-progress",
+    deadline: "2025-01-15", progress: 75, description: "Obtain CBAM certificates for imports"
+  },
+  {
+    id: "3", category: "Verification Report", status: "pending",
+    deadline: "2025-02-28", progress: 30, description: "Third-party verification of emissions data"
+  },
+];
+
+export const cbamComplianceData = {
+  items: cbamComplianceItems,
+  overallStatus: 67,
+  estimatedPenalties: 48500
+};
+
+export const sustainabilityInsights: Insight[] = [
+  {
+    id: "1", type: "recommendation" as const, title: "Optimize Energy Usage",
+    description: "Switch to renewable energy sources to reduce Scope 2 emissions by 40%", 
+    impact: "high" as const, category: "Energy", 
+    confidence: 92, actionRequired: true, estimatedSavings: 125000, timeframe: "6 months"
+  },
+  {
+    id: "2", type: "alert" as const, title: "CBAM Compliance Deadline",
+    description: "Upcoming CBAM certificate deadline requires immediate attention", 
+    impact: "high" as const, category: "Compliance", 
+    confidence: 98, actionRequired: true, estimatedSavings: 0, timeframe: "2 weeks"
+  },
+  {
+    id: "3", type: "optimization" as const, title: "Supply Chain Efficiency",
+    description: "Consolidate shipments to reduce transportation emissions", 
+    impact: "medium" as const, category: "Logistics", 
+    confidence: 85, actionRequired: false, estimatedSavings: 45000, timeframe: "3 months"
+  },
+];
+
 export const useStats = () => {
-  const carbonEmissionsData: EmissionData[] = [
-    { date: "Jan", scope1: 145.2, scope2: 234.8, scope3: 456.1, total: 836.1 },
-    { date: "Feb", scope1: 138.4, scope2: 228.3, scope3: 442.7, total: 809.4 },
-  ];
-
-  const suppliersData: Supplier[] = [
-    {
-      id: "1", name: "EcoTextiles Corp", location: "Mumbai, India", 
-      coordinates: { x: 65, y: 45 }, esgScore: 85, carbonFootprint: 12.4,
-      riskLevel: "low", category: "Textiles", compliance: 94
-    },
-  ];
-
-  const cbamComplianceData: ComplianceItem[] = [
-    {
-      id: "1", category: "Carbon Content Declaration", status: "completed",
-      deadline: "2024-12-31", progress: 100, description: "Submit carbon content data"
-    },
-  ];
-
-  const sustainabilityInsights: Insight[] = [
-    {
-      id: "1", type: "recommendation", title: "Optimize Energy",
-      description: "Switch to renewable energy", impact: "high", category: "Energy", 
-      confidence: 92, actionRequired: true, estimatedSavings: 125000, timeframe: "6 months"
-    },
-  ];
 
   return {
     loading: false,
@@ -130,11 +172,7 @@ export const useStats = () => {
     recentProjects: sustainabilityProjects,
     carbonEmissionsData,
     suppliersData,
-    cbamComplianceData: {
-      items: cbamComplianceData,
-      overallStatus: 67,
-      estimatedPenalties: 48500
-    },
+    cbamComplianceData,
     sustainabilityInsights,
     refreshData: () => console.log("Refreshing...")
   };

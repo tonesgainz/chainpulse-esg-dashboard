@@ -23,6 +23,10 @@ export default function Index() {
     esgScore, 
     trending, 
     recentProjects,
+    carbonEmissionsData,
+    suppliersData,
+    cbamComplianceData,
+    sustainabilityInsights,
     refreshData 
   } = useStats();
   

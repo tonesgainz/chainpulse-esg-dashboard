@@ -1,11 +1,14 @@
-
 import { useState, useEffect } from "react";
 import { 
   sustainabilityStats, 
   carbonGaugeData, 
   esgScoreIndex, 
   sustainabilityTrends, 
-  sustainabilityProjects 
+  sustainabilityProjects,
+  carbonEmissionsData,
+  suppliersData,
+  cbamComplianceData,
+  sustainabilityInsights
 } from "@/lib/mockData";
 
 // In a real application, we'd fetch from APIs:
@@ -18,10 +21,6 @@ import {
 export function useStats() {
   const [loading, setLoading] = useState(true);
   const [stats, setStats] = useState(sustainabilityStats);
-  const [carbonData, setCarbonData] = useState(carbonGaugeData);
-  const [esgScore, setEsgScore] = useState(esgScoreIndex);
-  const [trending, setTrending] = useState(sustainabilityTrends);
-  const [recentProjects, setRecentProjects] = useState(sustainabilityProjects);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -29,10 +28,6 @@ export function useStats() {
     const timer = setTimeout(() => {
       // In a real app, we would fetch data from APIs here
       setStats(sustainabilityStats);
-      setCarbonData(carbonGaugeData);
-      setEsgScore(esgScoreIndex);
-      setTrending(sustainabilityTrends);
-      setRecentProjects(sustainabilityProjects);
       setLoading(false);
     }, 1000);
 
@@ -52,10 +47,14 @@ export function useStats() {
     loading,
     error,
     stats,
-    carbonData,
-    esgScore,
-    trending,
-    recentProjects,
+    carbonData: carbonGaugeData,
+    esgScore: esgScoreIndex,
+    trending: sustainabilityTrends,
+    recentProjects: sustainabilityProjects,
+    carbonEmissionsData,
+    suppliersData,
+    cbamComplianceData,
+    sustainabilityInsights,
     refreshData
   };
 }
