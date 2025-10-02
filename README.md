@@ -1,6 +1,6 @@
 # Welcome to your Lovable project
 
-## Project info
+## Snf Factor
 
 **URL**: https://lovable.dev/projects/4d9cc67a-9f34-4173-b9e1-cbaae86219ac
 
