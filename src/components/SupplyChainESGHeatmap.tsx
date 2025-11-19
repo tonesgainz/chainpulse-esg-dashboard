@@ -68,7 +68,7 @@ export default function SupplyChainESGHeatmap({ suppliers }: SupplyChainESGHeatm
           <div className="flex items-center gap-3">
             <select
               value={filterRating}
-              onChange={(e) => setFilterRating(e.target.value as any)}
+              onChange={(e) => setFilterRating(e.target.value as "all" | "low" | "medium" | "high")}
               className="px-4 py-2 rounded-xl stat-card border border-white/10 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary/20"
             >
               <option value="all">All Suppliers</option>

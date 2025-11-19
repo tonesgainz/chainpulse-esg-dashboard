@@ -1,0 +1,20 @@
+[build]
+  # Directory that contains the build output
+  publish = "dist"
+
+  # Build command
+  command = "npm run build"
+
+# Redirect all requests to index.html for SPA routing
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Environment variables (set these in Netlify UI)
+# VITE_SUPABASE_URL
+# VITE_SUPABASE_PUBLISHABLE_KEY
+# VITE_SUPABASE_PROJECT_ID
+
+[build.environment]
+  NODE_VERSION = "18"
