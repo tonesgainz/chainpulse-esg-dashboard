@@ -24,12 +24,24 @@ export default function CarbonEmissionsTrendChart({
     name.charAt(0).toUpperCase() + name.slice(1)
   ];
 
-  const CustomTooltip = ({ active, payload, label }: any) => {
+  interface TooltipPayloadEntry {
+    value: number;
+    name: string;
+    color: string;
+  }
+
+  interface CustomTooltipProps {
+    active?: boolean;
+    payload?: TooltipPayloadEntry[];
+    label?: string;
+  }
+
+  const CustomTooltip = ({ active, payload, label }: CustomTooltipProps) => {
     if (active && payload && payload.length) {
       return (
         <div className="stat-card p-4 rounded-xl border border-white/20 backdrop-blur-xl">
           <p className="font-semibold text-foreground mb-2">{label}</p>
-          {payload.map((entry: any, index: number) => (
+          {payload.map((entry: TooltipPayloadEntry, index: number) => (
             <p key={index} className="text-sm" style={{ color: entry.color }}>
               {entry.name}: <span className="font-bold">{entry.value.toFixed(1)} kg CO2e</span>
             </p>
@@ -37,7 +49,7 @@ export default function CarbonEmissionsTrendChart({
           <div className="mt-2 pt-2 border-t border-white/10">
             <p className="text-xs text-muted-foreground">
               Total: <span className="font-semibold text-foreground">
-                {payload.reduce((sum: number, entry: any) => sum + entry.value, 0).toFixed(1)} kg CO2e
+                {payload.reduce((sum: number, entry: TooltipPayloadEntry) => sum + entry.value, 0).toFixed(1)} kg CO2e
               </span>
             </p>
           </div>
