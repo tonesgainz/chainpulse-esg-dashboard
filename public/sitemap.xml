@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+    <!-- Homepage / Dashboard -->
+    <url>
+        <loc>https://chainpulse-esg-dashboard.netlify.app/</loc>
+        <lastmod>2025-11-22</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>1.0</priority>
+    </url>
+
+    <!-- Future routes - uncomment when implemented -->
+    <!--
+    <url>
+        <loc>https://chainpulse-esg-dashboard.netlify.app/reports</loc>
+        <lastmod>2025-11-22</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://chainpulse-esg-dashboard.netlify.app/suppliers</loc>
+        <lastmod>2025-11-22</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://chainpulse-esg-dashboard.netlify.app/compliance</loc>
+        <lastmod>2025-11-22</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://chainpulse-esg-dashboard.netlify.app/settings</loc>
+        <lastmod>2025-11-22</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
+    -->
+
+</urlset>
+
+<!--
+Sitemap Notes:
+1. Update URLs with your actual domain
+2. Update lastmod dates when content changes
+3. Add new pages as they're implemented
+4. Changefreq values:
+   - always: Changes multiple times per day
+   - hourly: Changes hourly
+   - daily: Changes daily
+   - weekly: Changes weekly
+   - monthly: Changes monthly
+   - yearly: Changes yearly
+   - never: Archived content
+
+5. Priority values (0.0 to 1.0):
+   - 1.0: Most important page (usually homepage)
+   - 0.8: Important pages (main sections)
+   - 0.5: Standard pages
+   - 0.3: Less important pages
+
+6. Submit sitemap to search engines:
+   - Google Search Console: https://search.google.com/search-console
+   - Bing Webmaster Tools: https://www.bing.com/webmasters
+   - Add to robots.txt: Sitemap: https://your-domain.com/sitemap.xml
+-->

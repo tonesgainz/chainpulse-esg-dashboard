@@ -1,0 +1,110 @@
+# Docker Compose configuration for ChainPulse ESG Dashboard
+# Supports both development and production environments
+
+version: '3.8'
+
+services:
+  # ============================================
+  # Development Service
+  # ============================================
+  dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: development
+    container_name: chainpulse-dev
+    ports:
+      - "8080:8080"
+    volumes:
+      # Mount source code for hot reload
+      - .:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+      - VITE_SUPABASE_URL=${VITE_SUPABASE_URL}
+      - VITE_SUPABASE_PUBLISHABLE_KEY=${VITE_SUPABASE_PUBLISHABLE_KEY}
+      - VITE_SUPABASE_PROJECT_ID=${VITE_SUPABASE_PROJECT_ID}
+    networks:
+      - chainpulse-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:8080"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # ============================================
+  # Production Service
+  # ============================================
+  prod:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: production
+    container_name: chainpulse-prod
+    ports:
+      - "80:80"
+    environment:
+      - NODE_ENV=production
+    networks:
+      - chainpulse-network
+    restart: always
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/health"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 5s
+
+  # ============================================
+  # Optional: Supabase Local (Future)
+  # ============================================
+  # supabase:
+  #   image: supabase/postgres:latest
+  #   container_name: chainpulse-supabase
+  #   ports:
+  #     - "5432:5432"
+  #   environment:
+  #     POSTGRES_PASSWORD: your-super-secret-password
+  #     POSTGRES_DB: chainpulse
+  #   volumes:
+  #     - supabase-data:/var/lib/postgresql/data
+  #   networks:
+  #     - chainpulse-network
+  #   restart: always
+
+networks:
+  chainpulse-network:
+    driver: bridge
+
+volumes:
+  supabase-data:
+    driver: local
+
+# ============================================
+# Usage Instructions
+# ============================================
+# Development:
+#   docker-compose up dev
+#   Access: http://localhost:8080
+#
+# Production:
+#   docker-compose up prod
+#   Access: http://localhost
+#
+# Build and run in background:
+#   docker-compose up -d prod
+#
+# View logs:
+#   docker-compose logs -f dev
+#
+# Stop containers:
+#   docker-compose down
+#
+# Rebuild:
+#   docker-compose build --no-cache
+#   docker-compose up dev
+#
+# Clean up everything:
+#   docker-compose down -v --rmi all

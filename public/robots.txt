@@ -1,0 +1,36 @@
+# robots.txt for ChainPulse ESG Dashboard
+# https://chainpulse-esg-dashboard.netlify.app/robots.txt
+
+# Allow all search engines
+User-agent: *
+Allow: /
+
+# Disallow admin/sensitive routes (future)
+# Disallow: /admin/
+# Disallow: /api/
+# Disallow: /settings/
+
+# Crawl delay (optional, for polite crawlers)
+Crawl-delay: 1
+
+# Sitemap location
+Sitemap: https://chainpulse-esg-dashboard.netlify.app/sitemap.xml
+
+# Specific rules for common bots
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+# Block bad bots (optional)
+# User-agent: BadBot
+# Disallow: /
+
+# Notes:
+# - Update sitemap URL with your actual domain
+# - Add Disallow rules for protected routes
+# - Consider adding specific rules for API endpoints when backend is added
