@@ -119,18 +119,25 @@ export const suppliersData: Supplier[] = [
   },
 ];
 
+// Generate dynamic dates relative to current date
+const today = new Date();
+const nextMonth = new Date(today);
+nextMonth.setMonth(today.getMonth() + 1);
+const twoMonthsOut = new Date(today);
+twoMonthsOut.setMonth(today.getMonth() + 2);
+
 export const cbamComplianceItems: ComplianceItem[] = [
   {
     id: "1", category: "Carbon Content Declaration", status: "completed",
-    deadline: "2024-12-31", progress: 100, description: "Submit carbon content data"
+    deadline: today.toISOString().split('T')[0], progress: 100, description: "Submit carbon content data"
   },
   {
     id: "2", category: "CBAM Certificate", status: "in-progress",
-    deadline: "2025-01-15", progress: 75, description: "Obtain CBAM certificates for imports"
+    deadline: nextMonth.toISOString().split('T')[0], progress: 75, description: "Obtain CBAM certificates for imports"
   },
   {
     id: "3", category: "Verification Report", status: "pending",
-    deadline: "2025-02-28", progress: 30, description: "Third-party verification of emissions data"
+    deadline: twoMonthsOut.toISOString().split('T')[0], progress: 30, description: "Third-party verification of emissions data"
   },
 ];
 
