@@ -20,7 +20,6 @@ import {
 
 export function useStats() {
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     // Simulate API loading
@@ -41,7 +40,6 @@ export function useStats() {
 
   return {
     loading,
-    error,
     stats: sustainabilityStats,
     carbonData: carbonGaugeData,
     esgScore: esgScoreIndex,

@@ -1,7 +1,9 @@
 {
-  "name": "vite_react_shadcn_ts",
+  "name": "chainpulse-esg-dashboard",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "ESG monitoring and compliance dashboard for supply chain sustainability tracking",
+  "keywords": ["esg", "sustainability", "carbon-tracking", "cbam", "compliance", "supply-chain", "dashboard"],
   "type": "module",
   "scripts": {
     "dev": "vite",
