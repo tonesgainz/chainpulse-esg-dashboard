@@ -1,3 +1,6 @@
+# Netlify Configuration for ChainPulse ESG Dashboard
+# Documentation: https://docs.netlify.com/configure-builds/file-based-configuration/
+
 [build]
   # Directory that contains the build output
   publish = "dist"
@@ -5,16 +8,114 @@
   # Build command
   command = "npm run build"
 
+[build.environment]
+  # Node.js version for build environment
+  NODE_VERSION = "18"
+
 # Redirect all requests to index.html for SPA routing
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
 
-# Environment variables (set these in Netlify UI)
-# VITE_SUPABASE_URL
-# VITE_SUPABASE_PUBLISHABLE_KEY
-# VITE_SUPABASE_PROJECT_ID
+# Security Headers
+# These headers protect against common web vulnerabilities
+# Reference: https://owasp.org/www-project-secure-headers/
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # Content Security Policy (CSP)
+    # Prevents XSS attacks by controlling which resources can be loaded
+    # Note: Adjust 'unsafe-inline' and 'unsafe-eval' as needed for production
+    Content-Security-Policy = """
+      default-src 'self';
+      script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.gpteng.co;
+      style-src 'self' 'unsafe-inline';
+      img-src 'self' data: https:;
+      font-src 'self' data:;
+      connect-src 'self' https://*.supabase.co wss://*.supabase.co;
+      frame-ancestors 'none';
+      base-uri 'self';
+      form-action 'self';
+    """
 
-[build.environment]
-  NODE_VERSION = "18"
+    # Prevent clickjacking attacks
+    X-Frame-Options = "DENY"
+
+    # Prevent MIME-sniffing attacks
+    X-Content-Type-Options = "nosniff"
+
+    # Enable browser XSS protection (legacy, but still useful)
+    X-XSS-Protection = "1; mode=block"
+
+    # Force HTTPS for 1 year (31536000 seconds)
+    # includeSubDomains applies to all subdomains
+    # preload allows inclusion in browser HSTS preload lists
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+
+    # Control referrer information sent to external sites
+    # strict-origin-when-cross-origin: Send full URL for same-origin, only origin for cross-origin
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+    # Permissions Policy (formerly Feature Policy)
+    # Restricts which browser features can be used
+    Permissions-Policy = """
+      accelerometer=(),
+      camera=(),
+      geolocation=(),
+      gyroscope=(),
+      magnetometer=(),
+      microphone=(),
+      payment=(),
+      usb=()
+    """
+
+    # Cross-Origin policies for enhanced security
+    # Prevents other sites from embedding your content
+    Cross-Origin-Embedder-Policy = "require-corp"
+    Cross-Origin-Opener-Policy = "same-origin"
+    Cross-Origin-Resource-Policy = "same-origin"
+
+# Cache static assets for better performance
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Cache images
+[[headers]]
+  for = "/*.png"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.jpg"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.svg"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.webp"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Don't cache HTML files (allows quick updates)
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# Environment variables (set these in Netlify UI)
+# Navigate to: Site settings → Environment variables
+#
+# Required for Supabase integration (optional):
+# VITE_SUPABASE_URL=your-supabase-url
+# VITE_SUPABASE_PUBLISHABLE_KEY=your-supabase-anon-key
+# VITE_SUPABASE_PROJECT_ID=your-project-id
+#
+# Note: Environment variables prefixed with VITE_ are exposed to the client
+# Never put sensitive secrets in VITE_ variables
